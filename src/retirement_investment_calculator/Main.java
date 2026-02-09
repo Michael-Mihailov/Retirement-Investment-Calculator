@@ -58,10 +58,71 @@ public class Main {
 		
 		
 		// logic
-		
+		runSimulation(currentAge, retirementAge, currentBalance, annualContribution, annualInterestRate, compoundingFrequency, annualContributionIncrease);
 	}
 	
-	public static int readIntInRange(Scanner sc, String prompt, int min, int max)
+	
+	private static void runSimulation(int currentAge, int retirementAge, double currentBalance, double annualContribution, double annualInterestRate, int compoundingFrequency, double annualContributionIncrease)
+	{
+		// setup
+		int compoundSteps = 0;
+		switch (compoundingFrequency)
+		{
+			case 1:
+				compoundSteps = 1;
+				break;
+			case 2:
+				compoundSteps = 12;
+				break;
+			case 3:
+				compoundSteps = 365;
+				break;
+			default:
+				System.out.println("SIMULATION ERROR!");
+				return;
+		}
+		double stepRate = (annualInterestRate / compoundSteps) / 100;
+		double totalContributions = 0;
+		double totalInterest = 0;
+		
+		// print initial state
+		System.out.println("Year-by-Year Pojection");
+		System.out.printf("%-5s | %-20s | %-20s | %-20s | %-20s%n", 
+				"Age", "Start Balance", "Contributions", "Interest Earned", "End");
+		
+		// run simulation
+		for (int year = currentAge + 1; year <= retirementAge; year++)
+		{
+			double start = currentBalance;
+			currentBalance += annualContribution;
+			
+			double interest = currentBalance;
+			for (int step = 0; step < compoundSteps; step++)
+			{
+				interest *= (stepRate + 1);
+			}
+			interest -= currentBalance;
+			
+			// Print Row TODO
+			System.out.printf( "%-5d | $%-20.2f | $%-20.2f | $%-20.2f | $%-20.2f%n",
+					year, start, annualContribution, interest, currentBalance + interest);
+			
+			// increment
+			totalContributions += annualContribution;
+			totalInterest += interest;
+			currentBalance += interest;
+			annualContribution *= (1 + (annualContributionIncrease / 100));
+		}
+		
+		// print summary
+		System.out.println();
+		System.out.println("Summary");
+		System.out.println("Total Contributions: " + totalContributions);
+		System.out.println("Total Interest Earned: " + totalInterest);
+		System.out.println("Ending Balance: " + currentBalance);
+	}
+	
+	private static int readIntInRange(Scanner sc, String prompt, int min, int max)
 	{
 		int res = -1;
 		boolean done = false;
@@ -92,7 +153,7 @@ public class Main {
 		return res;
 	}
 	
-	public static double readDoubleInRange(Scanner sc, String prompt, double min, double max)
+	private static double readDoubleInRange(Scanner sc, String prompt, double min, double max)
 	{
 		double res = -1.0;
 		boolean done = false;
@@ -123,7 +184,7 @@ public class Main {
 		return res;
 	}
 	
-	public static int readCompoundingChoice(Scanner sc)
+	private static int readCompoundingChoice(Scanner sc)
 	{
 		int res = -1;
 		
@@ -134,7 +195,7 @@ public class Main {
 			
 			try
 			{
-				res = Integer.parseInt(user.nextLine());
+				res = Integer.parseInt(sc.nextLine());
 			}
 			catch (NumberFormatException e)
 			{
