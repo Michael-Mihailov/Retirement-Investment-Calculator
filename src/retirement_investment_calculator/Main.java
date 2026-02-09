@@ -33,7 +33,6 @@ public class Main {
 		
 		// variables
 		Scanner user = new Scanner(System.in);
-		String inputBuffer = null;
 		
 		int currentAge;
 		int retirementAge;
@@ -44,23 +43,38 @@ public class Main {
 		double annualContributionIncrease;
 		
 		
-		// input prompting
-		System.out.println("WELCOME TO THE RETIREMENT INVESTMENT CALCULATOR!!!");
-		System.out.println("This program will simulate the growth of a retirement account.");
-		
-		currentAge = readIntInRange(user, CURRENT_AGE_PROMPT, CURRENT_AGE_MIN, CURRENT_AGE_MAX);
-		retirementAge = readIntInRange(user, RETIREMENT_AGE_PROMPT, currentAge + 1, RETIREMENT_AGE_MAX);
-		currentBalance = readDoubleInRange(user, CURRENT_BALANCE_PROMPT, CURRENT_BALANCE_MIN, CURRENT_BALANCE_MAX);
-		annualContribution = readDoubleInRange(user, ANNUAL_CONTRIBUTION_PROMPT, ANNUAL_CONTRIBUTION_MIN, ANNUAL_CONTRIBUTION_MAX);
-		annualInterestRate = readDoubleInRange(user, ANNUAL_INTEREST_RATE_PROMPT, ANNUAL_INTEREST_RATE_MIN, ANNUAL_INTEREST_RATE_MAX);
-		compoundingFrequency = readCompoundingChoice(user);
-		annualContributionIncrease = readDoubleInRange(user, ANNUAL_CONTRIBUTION_INCREASE_PROMPT, ANNUAL_CONTRIBUTION_INCREASE_MIN, ANNUAL_CONTRIBUTION_INCREASE_MAX);
-		
-		
-		// logic
-		runSimulation(currentAge, retirementAge, currentBalance, annualContribution, annualInterestRate, compoundingFrequency, annualContributionIncrease);
+		// main loop
+		do
+		{
+			// input prompting
+			System.out.println();
+			System.out.println("WELCOME TO THE RETIREMENT INVESTMENT CALCULATOR!!!");
+			System.out.println("This program will simulate the growth of a retirement account.");
+			System.out.println();;
+			
+			currentAge = readIntInRange(user, CURRENT_AGE_PROMPT, CURRENT_AGE_MIN, CURRENT_AGE_MAX);
+			retirementAge = readIntInRange(user, RETIREMENT_AGE_PROMPT, currentAge + 1, RETIREMENT_AGE_MAX);
+			currentBalance = readDoubleInRange(user, CURRENT_BALANCE_PROMPT, CURRENT_BALANCE_MIN, CURRENT_BALANCE_MAX);
+			annualContribution = readDoubleInRange(user, ANNUAL_CONTRIBUTION_PROMPT, ANNUAL_CONTRIBUTION_MIN, ANNUAL_CONTRIBUTION_MAX);
+			annualInterestRate = readDoubleInRange(user, ANNUAL_INTEREST_RATE_PROMPT, ANNUAL_INTEREST_RATE_MIN, ANNUAL_INTEREST_RATE_MAX);
+			compoundingFrequency = readCompoundingChoice(user);
+			annualContributionIncrease = readDoubleInRange(user, ANNUAL_CONTRIBUTION_INCREASE_PROMPT, ANNUAL_CONTRIBUTION_INCREASE_MIN, ANNUAL_CONTRIBUTION_INCREASE_MAX);
+			
+			
+			// logic
+			System.out.println();
+			runSimulation(currentAge, retirementAge, currentBalance, annualContribution, annualInterestRate, compoundingFrequency, annualContributionIncrease);
+			System.out.println();
+		}
+		while (askRunAgain(user) == true);
 	}
 	
+	
+	private static boolean askRunAgain(Scanner sc)
+	{
+		System.out.println("Please enter \"YES\" if you would like to run the program again: ")
+		return (sc.nextLine().equalsIgnoreCase("YES"));
+	}
 	
 	private static void runSimulation(int currentAge, int retirementAge, double currentBalance, double annualContribution, double annualInterestRate, int compoundingFrequency, double annualContributionIncrease)
 	{
@@ -117,9 +131,9 @@ public class Main {
 		// print summary
 		System.out.println();
 		System.out.println("Summary");
-		System.out.println("Total Contributions: " + totalContributions);
-		System.out.println("Total Interest Earned: " + totalInterest);
-		System.out.println("Ending Balance: " + currentBalance);
+		System.out.printf("Total Contributions: $%-20.2f", totalContributions);
+		System.out.printf("Total Interest Earned: $%-20.2f", totalInterest);
+		System.out.printf("Ending Balance: $%-20.2f", currentBalance);
 	}
 	
 	private static int readIntInRange(Scanner sc, String prompt, int min, int max)
