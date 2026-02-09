@@ -10,184 +10,51 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
+		// constants
+		final String CURRENT_AGE_PROMPT = "Current Age: ";
+		final String RETIREMENT_AGE_PROMPT = "Retirement Age: ";
+		final String CURRENT_BALANCE_PROMPT = "Current Balance: ";
+		final String ANNUAL_CONTRIBUTION_PROMPT = "Annual Contribution: ";
+		final String ANNUAL_INTEREST_RATE_PROMPT = "Annual Interest Rate: ";
+		final String ANNUAL_CONTRIBUTION_INCREASE_PROMPT = "Annual Contribution Increase: ";
+		
+		final int CURRENT_AGE_MIN = 18;
+		final double CURRENT_BALANCE_MIN = 0;
+		final double ANNUAL_CONTRIBUTION_MIN = 0;
+		final double ANNUAL_INTEREST_RATE_MIN = 0;
+		final double ANNUAL_CONTRIBUTION_INCREASE_MIN = 0;
+		
+		final int CURRENT_AGE_MAX = 100;
+		final int RETIREMENT_AGE_MAX = 100;
+		final double CURRENT_BALANCE_MAX = Double.MAX_VALUE;
+		final double ANNUAL_CONTRIBUTION_MAX = Double.MAX_VALUE;
+		final double ANNUAL_INTEREST_RATE_MAX = 30;
+		final double ANNUAL_CONTRIBUTION_INCREASE_MAX = 20;
+		
 		// variables
 		Scanner user = new Scanner(System.in);
 		String inputBuffer = null;
 		
-		int currentAge = -1;
-		int retirementAge = -1;
-		double currentBalance = -1.0;
-		double annualContribution = -1.0;
-		double annualInterestRate = -1.0;
-		int compoundingFrequency = -1; // 1 == Annually, 2 == Monthly, 3 == Daily
-		double annualContributionIncrease = -1.0;
+		int currentAge;
+		int retirementAge;
+		double currentBalance;
+		double annualContribution;
+		double annualInterestRate;
+		int compoundingFrequency; // 1 == Annually, 2 == Monthly, 3 == Daily
+		double annualContributionIncrease;
 		
 		
 		// input prompting
 		System.out.println("WELCOME TO THE RETIREMENT INVESTMENT CALCULATOR!!!");
 		System.out.println("This program will simulate the growth of a retirement account.");
 		
-		do // get currentAge
-		{
-			System.out.print("Current Age: ");
-			inputBuffer = user.nextLine();
-			
-			try
-			{
-				currentAge = Integer.parseInt(inputBuffer);
-			}
-			catch (NumberFormatException e)
-			{
-				System.out.println("ERROR! Current age must be an integer!");
-				continue;
-			}
-			
-			if (currentAge < 18 || currentAge > 100)
-			{
-				System.out.println("ERROR! Current age must be between 18 and 100 years old!");
-				continue;
-			}
-		}
-		while (currentAge < 18 || currentAge > 100);
-		
-		do // get retirementAge
-		{
-			System.out.print("Retirement Age: ");
-			inputBuffer = user.nextLine();
-			
-			try
-			{
-				retirementAge = Integer.parseInt(inputBuffer);
-			}
-			catch (NumberFormatException e)
-			{
-				System.out.println("ERROR! Retirement age must be an integer!");
-				continue;
-			}
-			
-			if (retirementAge <= currentAge || retirementAge > 100)
-			{
-				System.out.println("ERROR! Retirement age must be between " + currentAge + " and 100 years old!");
-				continue;
-			}
-		}
-		while (retirementAge <= currentAge || retirementAge > 100);
-
-		do // get currentBalance
-		{
-			System.out.print("Current Balance: ");
-			inputBuffer = user.nextLine();
-			
-			try
-			{
-				currentBalance = Double.parseDouble(inputBuffer);
-			}
-			catch (NumberFormatException e)
-			{
-				System.out.println("ERROR! Current balance must be a decimal!");
-				continue;
-			}
-			
-			if (currentBalance < 0)
-			{
-				System.out.println("ERROR! Current balance must be at least $0.00");
-				continue;
-			}
-		}
-		while (currentBalance < 0);
-		
-		do // get annualContribution
-		{
-			System.out.print("Annual Contribution: ");
-			inputBuffer = user.nextLine();
-			
-			try
-			{
-				annualContribution = Double.parseDouble(inputBuffer);
-			}
-			catch (NumberFormatException e)
-			{
-				System.out.println("ERROR! Annual contribution must be a decimal!");
-				continue;
-			}
-			
-			if (annualContribution < 0)
-			{
-				System.out.println("ERROR! Annual contribution must be at least $0.00");
-				continue;
-			}
-		}
-		while (annualContribution < 0);
-		
-		do // get annualInterestRate
-		{
-			System.out.print("Annual Interest Rate: ");
-			inputBuffer = user.nextLine();
-			
-			try
-			{
-				annualInterestRate = Double.parseDouble(inputBuffer);
-			}
-			catch (NumberFormatException e)
-			{
-				System.out.println("ERROR! Annual interest rate must be a decimal!");
-				continue;
-			}
-			
-			if (annualInterestRate < 0 || annualInterestRate > 30)
-			{
-				System.out.println("ERROR! Annual interest rate must be between %0 and %30");
-				continue;
-			}
-		}
-		while (annualInterestRate < 0 || annualInterestRate > 30);
-		
-		do // get compoundingFrequency
-		{
-			System.out.println("1: Annualy\n2: Monthly\n3:Daily");
-			System.out.print("Compounding Frequency: ");
-			inputBuffer = user.nextLine();
-			
-			try
-			{
-				compoundingFrequency = Integer.parseInt(inputBuffer);
-			}
-			catch (NumberFormatException e)
-			{
-				System.out.println("ERROR! Compounding frequency must match menu selections!");
-				continue;
-			}
-			
-			if (compoundingFrequency < 1 || compoundingFrequency > 3)
-			{
-				System.out.println("ERROR! Compounding frequency must match menu selections!");
-				continue;
-			}
-		}
-		while (compoundingFrequency < 1 || compoundingFrequency > 3);
-		
-		do // get annualContributionIncrease
-		{
-			System.out.print("Annual Contribution Increase: ");
-			inputBuffer = user.nextLine();
-			
-			try
-			{
-				annualContributionIncrease = Double.parseDouble(inputBuffer);
-			}
-			catch (NumberFormatException e)
-			{
-				System.out.println("ERROR! Annual contribution increase must be a decimal!");
-				continue;
-			}
-			
-			if (annualContributionIncrease < 0 || annualContributionIncrease > 20)
-			{
-				System.out.println("ERROR! Annual contribution increase must be between %0 and %20");
-				continue;
-			}
-		}
-		while (annualContributionIncrease < 0 || annualContributionIncrease > 20);
+		currentAge = readIntInRange(user, CURRENT_AGE_PROMPT, CURRENT_AGE_MIN, CURRENT_AGE_MAX);
+		retirementAge = readIntInRange(user, RETIREMENT_AGE_PROMPT, currentAge + 1, RETIREMENT_AGE_MAX);
+		currentBalance = readDoubleInRange(user, CURRENT_BALANCE_PROMPT, CURRENT_BALANCE_MIN, CURRENT_BALANCE_MAX);
+		annualContribution = readDoubleInRange(user, ANNUAL_CONTRIBUTION_PROMPT, ANNUAL_CONTRIBUTION_MIN, ANNUAL_CONTRIBUTION_MAX);
+		annualInterestRate = readDoubleInRange(user, ANNUAL_INTEREST_RATE_PROMPT, ANNUAL_INTEREST_RATE_MIN, ANNUAL_INTEREST_RATE_MAX);
+		compoundingFrequency = readCompoundingChoice(user);
+		annualContributionIncrease = readDoubleInRange(user, ANNUAL_CONTRIBUTION_INCREASE_PROMPT, ANNUAL_CONTRIBUTION_INCREASE_MIN, ANNUAL_CONTRIBUTION_INCREASE_MAX);
 		
 		
 		// logic
