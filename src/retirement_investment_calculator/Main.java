@@ -67,6 +67,10 @@ public class Main {
 			System.out.println();
 		}
 		while (askRunAgain(user) == true);
+		
+		// end program
+		System.out.println("Thank You for using our service!");
+		user.close();
 	}
 	
 	
