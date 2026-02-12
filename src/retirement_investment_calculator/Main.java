@@ -76,7 +76,7 @@ public class Main {
 	
 	private static boolean askRunAgain(Scanner sc)
 	{
-		System.out.println("Please enter \"YES\" if you would like to run the program again: ")
+		System.out.println("Please enter \"YES\" if you would like to run the program again: ");
 		return (sc.nextLine().equalsIgnoreCase("YES"));
 	}
 	
