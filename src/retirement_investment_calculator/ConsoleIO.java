@@ -1,5 +1,7 @@
 package retirement_investment_calculator;
+import java.util.EnumSet;
 import java.util.Scanner;
+
 
 public class ConsoleIO {
 	
@@ -80,18 +82,24 @@ public class ConsoleIO {
 		return res;
 	}
 	
-	public int readCompoundingChoice()
+	public CompoundFrequency chooseCompoundFrequency(EnumSet<CompoundFrequency> choices)
 	{
-		int res = -1;
+		CompoundFrequency res = null;
+		int selectionNum = 0;
+		
+		CompoundFrequency[] choiceArr = (CompoundFrequency[])choices.toArray();
 		
 		do // get compoundingFrequency
 		{
-			System.out.println("1: Annualy\n2: Monthly\n3:Daily");
+			for (int i = 0; i < choiceArr.length; i++)
+			{
+				System.out.println((i+1) + ": " + choiceArr[i].name);
+			}
 			System.out.print("Compounding Frequency: ");
 			
 			try
 			{
-				res = Integer.parseInt(sc.nextLine());
+				selectionNum = Integer.parseInt(sc.nextLine());
 			}
 			catch (NumberFormatException e)
 			{
@@ -99,13 +107,15 @@ public class ConsoleIO {
 				continue;
 			}
 			
-			if (res < 1 || res > 3)
+			if (selectionNum < 1 || selectionNum > choiceArr.length)
 			{
 				System.out.println("ERROR! Compounding frequency must match menu selections!");
 				continue;
 			}
+			
+			res = choiceArr[selectionNum - 1];
 		}
-		while (res < 1 || res > 3);
+		while (res == null);
 		
 		return res;
 	}

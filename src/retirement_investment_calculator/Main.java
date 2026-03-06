@@ -31,6 +31,8 @@ public class Main {
 		final double ANNUAL_INTEREST_RATE_MAX = 30;
 		final double ANNUAL_CONTRIBUTION_INCREASE_MAX = 20;
 		
+		final EnumSet<CompoundFrequency> compoundFrequencyChoices = EnumSet.of(CompoundFrequency.ANNUALY, CompoundFrequency.MONTHLY, CompoundFrequency.DAILY);
+		
 		// variables
 		ConsoleIO IO = new ConsoleIO();
 		
@@ -39,7 +41,7 @@ public class Main {
 		double currentBalance;
 		double annualContribution;
 		double annualInterestRate;
-		int compoundingFrequency; // 1 == Annually, 2 == Monthly, 3 == Daily
+		CompoundFrequency compoundFrequency;
 		double annualContributionIncrease;
 		
 		
@@ -53,7 +55,7 @@ public class Main {
 			currentBalance = IO.readDoubleInRange(CURRENT_BALANCE_PROMPT, CURRENT_BALANCE_MIN, CURRENT_BALANCE_MAX);
 			annualContribution = IO.readDoubleInRange(ANNUAL_CONTRIBUTION_PROMPT, ANNUAL_CONTRIBUTION_MIN, ANNUAL_CONTRIBUTION_MAX);
 			annualInterestRate = IO.readDoubleInRange(ANNUAL_INTEREST_RATE_PROMPT, ANNUAL_INTEREST_RATE_MIN, ANNUAL_INTEREST_RATE_MAX);
-			compoundingFrequency = IO.readCompoundingChoice();
+			compoundFrequency = IO.chooseCompoundFrequency(compoundFrequencyChoices);
 			annualContributionIncrease = IO.readDoubleInRange(ANNUAL_CONTRIBUTION_INCREASE_PROMPT, ANNUAL_CONTRIBUTION_INCREASE_MIN, ANNUAL_CONTRIBUTION_INCREASE_MAX);
 			
 			
