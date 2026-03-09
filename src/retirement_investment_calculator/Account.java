@@ -33,6 +33,6 @@ public class Account {
 	public BigDecimal getAnnualInterestRate() {return annualInterestRate;}
 	public void setAnnualInterestRate(BigDecimal annualInterestRate) {this.annualInterestRate = annualInterestRate;}
 	
-	public CompoundFrequency getCompoundingFrequency() {return compoundFrequency;}
-	public void setCompoundingFrequency(CompoundFrequency compoundFrequency) {this.compoundFrequency = compoundFrequency;}
+	public CompoundFrequency getCompoundFrequency() {return compoundFrequency;}
+	public void setCompoundFrequency(CompoundFrequency compoundFrequency) {this.compoundFrequency = compoundFrequency;}
 }

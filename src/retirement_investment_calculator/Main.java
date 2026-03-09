@@ -67,15 +67,7 @@ public class Main {
 		while (askRunAgain(user) == true);
 		
 		// end program
-		System.out.println("Thank You for using our service!");
-		user.close();
-	}
-	
-	
-	private static boolean askRunAgain(Scanner sc)
-	{
-		System.out.println("Please enter \"YES\" if you would like to run the program again: ");
-		return (sc.nextLine().equalsIgnoreCase("YES"));
+		IO.printExitMessage();
 	}
 	
 	private static void runSimulation(int currentAge, int retirementAge, double currentBalance, double annualContribution, double annualInterestRate, int compoundingFrequency, double annualContributionIncrease)

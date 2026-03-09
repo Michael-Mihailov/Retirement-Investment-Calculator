@@ -119,4 +119,15 @@ public class ConsoleIO {
 		
 		return res;
 	}
+	
+	public boolean askRunAgain()
+	{
+		System.out.println("Please enter \"YES\" if you would like to run the program again: ");
+		return (sc.nextLine().equalsIgnoreCase("YES"));
+	}
+	
+	public void printExitMessage()
+	{
+		System.out.println("Thank You for using our service!");
+	}
 }
