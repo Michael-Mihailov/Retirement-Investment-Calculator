@@ -19,8 +19,8 @@ public class Account {
 	public Account (Account other)
 	{
 		this.age = other.age;
-		this.balance = new BigDecimal(other.balance.toString());
-		this.annualInterestRate = new BigDecimal(other.annualInterestRate.toString());
+		this.balance = other.balance;
+		this.annualInterestRate = other.annualInterestRate;
 		this.compoundFrequency = other.compoundFrequency;
 	}
 	

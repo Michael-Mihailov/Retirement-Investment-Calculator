@@ -1,5 +1,6 @@
 package retirement_investment_calculator;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -60,11 +61,12 @@ public class Main {
 			
 			
 			// logic
-			System.out.println();
-			runSimulation(currentAge, retirementAge, currentBalance, annualContribution, annualInterestRate, compoundingFrequency, annualContributionIncrease);
-			System.out.println();
+			Account initialAccount = new Account(currentAge, new BigDecimal(currentBalance), new BigDecimal(annualInterestRate), compoundFrequency);
+			InvestmentSimulator simulator = new InvestmentSimulator(initialAccount);
+			ArrayList<String> receipt = simulator.runSimulation(retirementAge, annualContribution, annualContributionIncrease);
+			for (String s : receipt) System.out.println(s);
 		}
-		while (askRunAgain(user) == true);
+		while (IO.askRunAgain() == true);
 		
 		// end program
 		IO.printExitMessage();

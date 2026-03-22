@@ -87,7 +87,7 @@ public class ConsoleIO {
 		CompoundFrequency res = null;
 		int selectionNum = 0;
 		
-		CompoundFrequency[] choiceArr = (CompoundFrequency[])choices.toArray();
+		CompoundFrequency[] choiceArr = choices.toArray(new CompoundFrequency[0]);
 		
 		do // get compoundingFrequency
 		{
